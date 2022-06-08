@@ -1,0 +1,10 @@
+.nav-items{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width:100%;
+}
+
+.nav-items li{
+  margin-right: 1rem;
+}

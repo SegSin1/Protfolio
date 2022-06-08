@@ -1,0 +1,16 @@
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:40vw;
+}
+
+.input-text {
+  border: none;
+  width:20vw;
+  height:2rem;
+}
+
+.input-text:focus {
+  outline: none;
+}

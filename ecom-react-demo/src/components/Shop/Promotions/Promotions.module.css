@@ -1,0 +1,6 @@
+.promotions-container{
+    display: flex;
+    width:100%;
+    border:1px solid red;
+    flex:1;
+}

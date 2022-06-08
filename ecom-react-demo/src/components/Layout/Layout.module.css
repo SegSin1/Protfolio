@@ -11,7 +11,8 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-    height:100%;
+    height:calc(100%-10rem);
     width:100%;
     max-width: 150rem;
+    margin:4rem;
 }
