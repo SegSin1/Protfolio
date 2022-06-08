@@ -75,9 +75,9 @@ const ProductItem = () => {
           <div className={classes.details}>
             <div className={classes["main-details"]}>
               <div className={classes.title}>Gibson Les Paul</div>
-              <div className={classes.price}>$1499.99</div>
+              <div className={classes.price}>$2599.99</div>
             </div>
-            <div>Lorem Lorem LoremLorem Lorem Lorem LoremLoremLoremLorem</div>
+            <p>Lorem Lorem LoremLorem Lorem Lorem LoremLoremLoremLorem</p>
             <button className={classes.btn}>Add</button>
           </div>
         </div>

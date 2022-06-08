@@ -1,5 +1,6 @@
 .promotions-container{
     display: flex;
+    flex-wrap: wrap;
     width:100%;
     border:1px solid red;
     flex:1;

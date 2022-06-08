@@ -2,15 +2,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width:40vw;
+  width: 40vw;
 }
 
-.input-text {
+.input-text,
+.input-number,
+.input-file {
   border: none;
-  width:20vw;
-  height:2rem;
+  width: 20vw;
+  height: 2rem;
+  font-size: 1.2rem;
+  z-index:9999;
 }
 
-.input-text:focus {
+.input-text:focus,
+.input-number:focus {
   outline: none;
+}
+
+.form-control {
+  border-bottom: 1px solid #c3c3c3;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  letter-spacing: .18rem;
+  z-index:0;
+  font-size: 1.1rem;
+
+}
+
+.label-focus {
+  top: -9px;
+  font-size: .9rem;
+  color: rgb(36, 133, 185);
+  transition: 0.2s;
+  /* font-weight: 600; */
 }

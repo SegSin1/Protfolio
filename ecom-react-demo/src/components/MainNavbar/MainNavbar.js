@@ -26,9 +26,10 @@ const MainNavbar = () => {
             ToneWars
           </span>
         </li>
-        <li>
+        <li className={classes["nav-search"]}>
           <Input type={"text"} id={"nav-search"} iconType="search" />
         </li>
+        <li>SELL</li>
         <li>
           <ul
             style={{
@@ -37,7 +38,7 @@ const MainNavbar = () => {
               justifyContent: "center",
             }}
           >
-            <li>
+            <li className={classes["user-details"]}>
               <Avatar
                 className="big"
                 isHeader={true}
@@ -45,7 +46,7 @@ const MainNavbar = () => {
                 text={"S"}
               />
             </li>
-            <li>Welcome {"Segev"}!</li>
+            <li className={classes["user-details"]}>Welcome {"Segev"}!</li>
             <li>
               <StoreNotificationBtn />
             </li>
