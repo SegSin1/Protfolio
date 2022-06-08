@@ -11,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
 input[type="file"]::file-selector-button {
   border: none;
   padding: 0.4rem 0.8rem;

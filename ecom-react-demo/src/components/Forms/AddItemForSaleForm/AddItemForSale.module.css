@@ -5,4 +5,9 @@
     align-items: center;
     justify-content: center;
     gap:.3rem;
+    position:relative;
+}
+
+.close-form{
+    
 }

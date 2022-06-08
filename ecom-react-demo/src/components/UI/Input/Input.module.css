@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   width: 40vw;
+  min-width: 40rem;
 }
 
 .input-text,
@@ -10,6 +11,7 @@
 .input-file {
   border: none;
   width: 20vw;
+  min-width: 20rem;
   height: 2rem;
   font-size: 1.2rem;
   z-index:9999;
