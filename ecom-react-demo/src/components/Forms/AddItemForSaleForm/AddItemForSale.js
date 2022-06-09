@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Input from "../../UI/Input/Input";
+import ImageBox from "./ImageBox/ImageBox";
 import classes from "./AddItemForSale.module.css";
 import {
   getStorage,
@@ -14,6 +15,9 @@ const addItemHandler = (e) => {
 };
 
 const AddItemForSale = () => {
+  const [imageFile, setImageFile] = useState(null);
+  const [images, setImages] = useState([]);
+
   return (
     <form onSubmit={addItemHandler} className={classes["form-container"]}>
       <Input className={"form-control"} type="text" label={"Title"} />
@@ -44,7 +48,12 @@ const AddItemForSale = () => {
       {/* <Input className={"form-control"} type="checkbox" label={"Accept Offers"}  animateLabel={false}/> */}
       {/* <Input className={"form-control"} type="text" label={"Reserve Price"} /> */}
       {/* @TODO : limit files type and qty in state */}
-      <Input type="file" max="5" multiple="multiple" accept=".jpg,.png,.jpeg" />
+      <div className={classes["image-gallery"]}>
+        <ImageBox />
+        <ImageBox />
+        <ImageBox />
+        <ImageBox />
+      </div>
       <button type="submit">Add New Item</button>
     </form>
   );
