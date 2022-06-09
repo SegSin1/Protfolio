@@ -3,7 +3,7 @@ import NavBar from "../UI/NavBar/Navbar";
 import Input from "../UI/Input/Input";
 import classes from "./MainNavbar.module.css";
 import Avatar from "../UI/Avatar/Avatar";
-import userImg from "../../assets/tyler.jpg";
+import userImg from "../../assets/Segev.jpg";
 import CartBtn from "../Cart/CartBtn";
 import StoreNotificationBtn from "../StoreNotifications/StoreNotificationBtn";
 import { GiMusicSpell } from "react-icons/gi";
@@ -41,6 +41,7 @@ const MainNavbar = () => {
             <li className={classes["user-details"]}>
               <Avatar
                 className="big"
+                iconColor=""
                 isHeader={true}
                 imgSrc={userImg}
                 text={"S"}

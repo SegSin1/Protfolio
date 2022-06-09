@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../UI/Input/Input";
 import classes from "./AddItemForSale.module.css";
+import {
+  getStorage,
+  ref,
+  unploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { appStorage } from "../../../firebase/config";
 
 const addItemHandler = (e) => {
   e.preventDefault();
@@ -27,14 +34,17 @@ const AddItemForSale = () => {
         label={"Price"}
       />
       <Input className={"form-control"} type="text" label={"Currency"} />
-
       <Input
         className={"form-control"}
         type="number"
         minValue={1}
         label={"Avaliable Quantity"}
       />
-      <Input type="file" multiple="multiple" />
+      {/* <Input className={"form-control"} type="checkbox" label={"Accept Bids"} animateLabel={false}/> */}
+      {/* <Input className={"form-control"} type="checkbox" label={"Accept Offers"}  animateLabel={false}/> */}
+      {/* <Input className={"form-control"} type="text" label={"Reserve Price"} /> */}
+      {/* @TODO : limit files type and qty in state */}
+      <Input type="file" max="5" multiple="multiple" accept=".jpg,.png,.jpeg" />
       <button type="submit">Add New Item</button>
     </form>
   );

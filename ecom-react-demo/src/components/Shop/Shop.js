@@ -1,6 +1,6 @@
 import Products from "./Products/Products";
 import Promotions from "./Promotions/Promotions";
-import AddItemForSale from '../Forms/AddItemForSaleForm/AddItemForSale'
+import AddItemForSale from "../Forms/AddItemForSaleForm/AddItemForSale";
 import classes from "./Shop.module.css";
 
 let MOCK_PRODUCTS = [
@@ -13,6 +13,8 @@ let MOCK_PRODUCTS = [
     brand: "Gibson",
     availableQty: 2,
     images: [],
+    type: "auction",
+    offersEnabled: true,
   },
   {
     id: "a2",
@@ -23,6 +25,8 @@ let MOCK_PRODUCTS = [
     brand: "Gibson",
     availableQty: 1,
     images: [],
+    offersEnabled: true,
+    type: "sale",
   },
   {
     id: "a3",
@@ -33,6 +37,8 @@ let MOCK_PRODUCTS = [
     brand: "Gibson",
     availableQty: 2,
     images: [],
+    offersEnabled: true,
+    type: "sale",
   },
   {
     id: "a4",
@@ -43,6 +49,8 @@ let MOCK_PRODUCTS = [
     brand: "Gibson",
     availableQty: 1,
     images: [],
+    offersEnabled: true,
+    type: "auction",
   },
   {
     id: "a5",
@@ -53,6 +61,8 @@ let MOCK_PRODUCTS = [
     brand: "Gibson",
     availableQty: 2,
     images: [],
+    offersEnabled: true,
+    type: "auction",
   },
   {
     id: "a6",
@@ -63,6 +73,8 @@ let MOCK_PRODUCTS = [
     brand: "Gibson",
     availableQty: 1,
     images: [],
+    offersEnabled: true,
+    type: "auction",
   },
 ];
 let MOCK_PROMOTIONS = [1, 2, 3, 4];
@@ -70,8 +82,8 @@ let MOCK_PROMOTIONS = [1, 2, 3, 4];
 const Shop = () => {
   return (
     <div className={classes["shop-container"]}>
-      <AddItemForSale></AddItemForSale>
-      <Promotions promotions={MOCK_PROMOTIONS} />
+      <AddItemForSale/>
+      {/* <Promotions promotions={MOCK_PROMOTIONS} /> */}
       <Products products={MOCK_PRODUCTS} />
     </div>
   );
