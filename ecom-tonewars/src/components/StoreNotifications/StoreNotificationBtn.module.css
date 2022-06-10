@@ -1,0 +1,29 @@
+.notifications-btn{
+    border:none;
+    color:white;
+    background:transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-left:10px;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -5px;
+    left: 15px;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    border-radius: 50%;
+    height: 1.5rem;
+    width: 1.5rem;
+    font-size: 1.1rem;
+    padding: 9px;
+    text-align: center;
+    background-color: red;
+    font-weight: 600;
+  }

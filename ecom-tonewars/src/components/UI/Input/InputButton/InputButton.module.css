@@ -1,0 +1,8 @@
+.input-btn{
+    border: none;
+    background: transparent;
+}
+
+.input-btn:focus{
+   outline: none;
+}

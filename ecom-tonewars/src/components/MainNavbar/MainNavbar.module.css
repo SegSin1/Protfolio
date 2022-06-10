@@ -1,0 +1,23 @@
+.nav-items{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width:100%;
+}
+
+.nav-items li{
+  margin-right: 1rem;
+}
+
+.nav-items li:hover{
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 600px){
+  .nav-search,
+  .user-details{
+    display:none;
+  }
+}
+
