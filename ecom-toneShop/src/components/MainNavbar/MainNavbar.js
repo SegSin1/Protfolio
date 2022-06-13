@@ -8,6 +8,7 @@ import CartBtn from "../Cart/CartBtn";
 import StoreNotificationBtn from "../StoreNotifications/StoreNotificationBtn";
 import { GiMusicSpell } from "react-icons/gi";
 
+
 const MainNavbar = () => {
   const isLoggedIn = false;
 

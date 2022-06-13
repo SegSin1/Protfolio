@@ -8,7 +8,7 @@ import {
   getDownloadURL,
 } from "../firebase/config";
 
-const useFirebaseStorage = (file) => {
+const useFirebaseStorage = (file,setImgURL) => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   const [url, setUrl] = useState([]);
@@ -17,7 +17,6 @@ const useFirebaseStorage = (file) => {
     if (file) {
       const storageRef = ref(appStorage, file.name);
       const uploadTask = uploadBytesResumable(storageRef, file);
-
       uploadTask.on(
         "state_change",
         (snapshot) => {
@@ -33,6 +32,7 @@ const useFirebaseStorage = (file) => {
           //   const createdAt = timestamp();
           //   await collectionRef.add({ url, createdAt });
           setUrl((prevState) => [...prevState, url]);
+          setImgURL(url)
         }
       );
     }

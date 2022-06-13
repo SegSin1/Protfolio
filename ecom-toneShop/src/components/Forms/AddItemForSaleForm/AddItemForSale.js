@@ -28,6 +28,7 @@ const AddItemForSale = () => {
         label={"Secondary Category"}
       />
       <Input className={"form-control"} type="text" label={"Brand"} />
+      <Input className={"form-control"} type="text" label={"Model"} />
       <Input className={"form-control"} type="text" label={"Description"} />
       <Input className={"form-control"} type="text" label={"Color"} />
       <Input

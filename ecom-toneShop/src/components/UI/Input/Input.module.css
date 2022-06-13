@@ -11,8 +11,8 @@
 .input-number,
 .input-file {
   border: none;
-  width: 20vw;
-  min-width: 20rem;
+  width: 30vw;
+  min-width: 25rem;
   height: 2rem;
   font-size: 1.2rem;
   z-index:9999;

@@ -14,5 +14,7 @@ main{
     height:calc(100%-10rem);
     width:100%;
     max-width: 150rem;
+    /* height:90vh; */
     margin:4rem;
+    flex:5
 }

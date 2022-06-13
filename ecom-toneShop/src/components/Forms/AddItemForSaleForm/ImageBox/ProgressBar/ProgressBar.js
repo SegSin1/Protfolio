@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import  useFirebaseStorage  from "../../../hooks/useFirebaseStorage";
+import  useFirebaseStorage  from "../../../../../hooks/useFirebaseStorage";
 import classes from "./ProgressBar.module.css";
 
-const ProgressBar = ({ file, setFile }) => {
-  const { progress, url } = useFirebaseStorage(file);
+const ProgressBar = ({ file, setFile,setImgURL }) => {
+  const { progress, url } = useFirebaseStorage(file,setImgURL);
 
   useEffect(() => {
     if (url) {
