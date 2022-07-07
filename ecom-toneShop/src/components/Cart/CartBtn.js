@@ -1,12 +1,20 @@
 import { FiShoppingCart } from "react-icons/fi";
 import classes from "./CartBtn.module.css";
-import useCartCtx from "../../hooks/useCartCtx";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+
 const CartBtn = () => {
-  const { cart } = useCartCtx();
+  // const { cart } = useCartCtx();
+  const navigate = useNavigate();
+  const totalQty = useSelector(state => state.cart.totalQty);
+
+  const showCartHandler = () => {
+    navigate('/cart')
+  }
   return (
-    <button className={classes["cart-btn"]}>
+    <button className={classes["cart-btn"]} onClick={showCartHandler}>
       <FiShoppingCart size={25} />
-      <span className={classes.badge}>{cart.totalQty}</span>
+      <span className={classes.badge}>{totalQty}</span>
     </button>
   );
 };

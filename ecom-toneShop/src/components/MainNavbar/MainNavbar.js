@@ -7,15 +7,20 @@ import userImg from "../../assets/Segev.jpg";
 import CartBtn from "../Cart/CartBtn";
 import StoreNotificationBtn from "../StoreNotifications/StoreNotificationBtn";
 import { GiMusicSpell } from "react-icons/gi";
+import { useNavigate } from 'react-router-dom'
 
 
 const MainNavbar = () => {
   const isLoggedIn = false;
-
+  const navigate = useNavigate();
+  const logoClickHandler = () => {
+    navigate('/')
+  }
   return (
     <NavBar>
       <ul className={classes["nav-items"]}>
         <li
+          onClick={logoClickHandler}
           style={{
             display: "flex",
             alignItems: "center",
