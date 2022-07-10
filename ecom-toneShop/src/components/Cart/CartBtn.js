@@ -1,6 +1,6 @@
 import { FiShoppingCart } from "react-icons/fi";
 import classes from "./CartBtn.module.css";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 
 const CartBtn = () => {

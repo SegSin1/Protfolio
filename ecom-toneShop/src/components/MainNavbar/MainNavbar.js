@@ -6,6 +6,7 @@ import Avatar from "../UI/Avatar/Avatar";
 import userImg from "../../assets/Segev.jpg";
 import CartBtn from "../Cart/CartBtn";
 import StoreNotificationBtn from "../StoreNotifications/StoreNotificationBtn";
+import StoreWatchListBtn from '../WatchList/StoreWatchListBtn';
 import { GiMusicSpell } from "react-icons/gi";
 import { useNavigate } from 'react-router-dom'
 
@@ -33,7 +34,7 @@ const MainNavbar = () => {
           </span>
         </li>
         <li className={classes["nav-search"]}>
-          <Input type={"text"} id={"nav-search"} iconType="search" />
+          <Input type={"text"} id={"nav-search"} iconType="search" placeholder={'Search anything...'} />
         </li>
         <li>SELL</li>
         <li>
@@ -56,6 +57,9 @@ const MainNavbar = () => {
             <li className={classes["user-details"]}>Welcome {"Segev"}!</li>
             <li>
               <StoreNotificationBtn />
+            </li>
+            <li>
+            <StoreWatchListBtn/>
             </li>
             <li>
               <CartBtn />
