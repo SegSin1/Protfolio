@@ -1,28 +1,32 @@
 import classes from './CartSummary.module.css'
+import { useSelector } from 'react-redux';
 
-const CartSummary = ({ numOfItems }) => {
+const CartSummary = ({ numOfItems,totalAmount }) => {
+    const shippingCost = 65.47;
+    const discounts = 0;
+    const importFees = 175.45;
     return <div className={classes['summary-container']}>
         <table>
             <tbody>
                 <tr>
                     <td>{`${numOfItems > 1 ? 'Items' : 'Item'} (${numOfItems})`}</td>
-                    <td>{numOfItems.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                    <td>{totalAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                 </tr>
                 <tr>
                     <td>{`Shipping to 8484354`}</td>
-                    <td>{numOfItems.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                    <td>{shippingCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                 </tr>
                 <tr>
                     <td>{`Import Charges`}</td>
-                    <td>{numOfItems.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                    <td>{importFees.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                 </tr>
                 <tr>
                     <td>{`Discounts`}</td>
-                    <td>{numOfItems.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                    <td>{discounts.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                 </tr>
                 <tr>
                     <td>{`Sub Total`}</td>
-                    <td>{numOfItems.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                    <td>{(shippingCost+totalAmount+discounts+importFees).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                 </tr>
             </tbody>
         </table>

@@ -5,10 +5,12 @@ import { BiDish } from "react-icons/bi";
 import { cartActions } from "../../../../store/slices/cart-slice";
 import { productsActions } from "../../../../store/slices/products-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { dateReducerFn } from '../../../../reducers/dateReducer'
+import { dateReducerFn } from '../../../../reducers/dateReducer';
+import { useNavigate } from 'react-router-dom';
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector(state => state.cart.items)
   const products = useSelector(state => state.products);
   const [timer, dispatchTimer] = useReducer(dateReducerFn, { isExpired: false, timer: 0, interval: "" })
@@ -55,9 +57,13 @@ const ProductItem = ({ product }) => {
     setIsFavorite(prevState => !prevState)
   }
 
+  const showProductDetailsHandler = () => {
+    navigate(`/products/${id}`)
+  }
+
   return (
     <li key={id} className={`${classes["product-container"]} ${showMore ? classes["show-more"] : ''}`}>
-      <div className={classes['img-container']} >
+      <div className={classes['img-container']} onClick={showProductDetailsHandler}>
         <div className={classes.img}>
           <img src={images[0]} style={{}} alt="productImg" />
         </div>
@@ -77,7 +83,7 @@ const ProductItem = ({ product }) => {
         <div className={classes["btns-container"]}>
           {!isInCart && !timer.isExpired && type !== 'auction' && (
             <>
-              {(timer.interval === 'hours' || timer.interval === 'ending') && availableQty >= 1 && <span   className={classes["item-timer"]} style={{color: timer.interval === 'ending' ? 'red' : 'inherit' }}>{!timer.isExpired && timer.string}</span>}
+              {(timer.interval === 'hours' || timer.interval === 'ending') && availableQty >= 1 && <span className={classes["item-timer"]} style={{ color: timer.interval === 'ending' ? 'red' : 'inherit' }}>{!timer.isExpired && timer.string}</span>}
               <button className={classes.btn} onClick={addToCartHandler}>
                 <BsCartPlus size={20} />
               </button>
@@ -86,7 +92,7 @@ const ProductItem = ({ product }) => {
           }
           {!isInCart && !timer.isExpired && type === 'auction' && (
             <>
-              {(timer.interval === 'hours' || timer.interval === 'ending' || timer.interval === 'days') && <span  className={classes["item-timer"]}  style={{ fontWeight: 600, marginRight: '5px' }}>{!timer.isExpired && timer.string}</span>}
+              {(timer.interval === 'hours' || timer.interval === 'ending' || timer.interval === 'days') && <span className={classes["item-timer"]} style={{ fontWeight: 600, marginRight: '5px' }}>{!timer.isExpired && timer.string}</span>}
               <button>
                 <BiDish size={20} />
               </button>

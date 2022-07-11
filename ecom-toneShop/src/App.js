@@ -2,6 +2,7 @@ import Layout from "./components/Layout/Layout";
 import Shop from "./components/Shop/Shop";
 import Cart from './components/Cart/Cart'
 import WatchList from "./components/WatchList/WatchList";
+import ProductDetails from "./components/Shop/Products/ProductDetails/ProductDetails"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./store/CartContext/CartContext";
 import StoreNotifications from "./components/StoreNotifications/StoreNotifications";
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/watchlist" element={<WatchList />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/notifications" element={<StoreNotifications />} />
             <Route path="/order/checkout" element={<Shop />} />
             <Route path="/order/confirmation" element={<Shop />} />

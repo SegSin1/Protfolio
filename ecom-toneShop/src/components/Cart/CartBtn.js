@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 
 const CartBtn = () => {
-  // const { cart } = useCartCtx();
   const navigate = useNavigate();
   const totalQty = useSelector(state => state.cart.totalQty);
 

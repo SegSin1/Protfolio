@@ -8,7 +8,7 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Dean",
-        modal: "MLX Floyd Black Satin",
+        model: "MLX Floyd Black Satin",
         description: "The brand new X- Series line offers all the quality features and aesthetics of High-end Deans, but at a price anyone can afford. The ML X features: a bolt on 22 fret maple neck with Indian Rosewood Fingerboard as well as white binding on the body, neck, and headstock. The DMT Designed High Output Zebra Pickups offer everything you need as a beginner or a seasoned pro. All of these features are finished off by a Floyd Rose FR20 Tremolo system and Satin black finish to provide the perfect blend of class and boldness.",
         color: "black",
         price: 2370,
@@ -32,7 +32,7 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Dean",
-        modal: "Dimebag Lightning Bolt ML",
+        model: "Dimebag Lightning Bolt ML",
         description: "This guitar has a unique appearance in a unique size. Perfect for any Dimebag fan! It is in great condition but has had a pot replaced by a professional. This deal includes a coffin case that adds to the uniqueness of the guitar. Feel free to make an offer, send any questions in the messenger, or give us a call at 864-422-0072. We now offer Reverb's layaway and direct checkout!",
         color: "black",
         price: 1699,
@@ -56,12 +56,12 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Gibson",
-        modal: "Les Paul",
+        model: "Les Paul",
         description: "Gibson Custom Shop's 1959 Les Paul Standard Reissue is not just a tribute to the priceless original models -- it's a clone of them. From laser-scanned dimensions to chemically-recreated plastics to colour-matched shades of sunburst, every element has been rendered in unbelievable detail. It represents the culmination of decades of work by Custom Shop's expert team -- a tireless quest to bring accuracy and authenticity to the hands of fans. Its the definition of cool, and it's the best representation of the 1959 Les Paul Standard since the Gibson Custom Shop began making Historic Reissues over twenty-five years ago.",
         color: "black",
         price: 7699,
         currency: "USD",
-        availableQty: 21,
+        availableQty: 1,
         images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC-IE6BSrnLvA-tqlspEam8HdCn80JviCaJg&usqp=CAU'],
         type: "sell",
         expiry: "2022-09-27T06:31:23.970Z",
@@ -80,7 +80,7 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Gibson",
-        modal: "Les Paul",
+        model: "Les Paul",
         description: "Fender Road Worn is back! Those of us who love vintage instruments can’t help but have a special place for the ones that wear their licks and lumps with pride, boldly brandishing the tarnish of time as a catalog of a life hard-lived and shows hard-played. We teamed up with our friends in the UK, Andertons Music Co., to create just such a guitar. The CME Exclusive Fender Road Worn 1960s Stratocaster is the spitting image of the real thing, outfitted with period-correct components, USA-made Pure Vintage ‘59 Strat pickups, and CME Exclusive finishes like Vintage White, Daphne Blue, and Candy Apple Red, each pulled from the pages of history and made to look as broken in as they feel.",
         color: "black",
         price: 3499,
@@ -104,7 +104,7 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Gibson",
-        modal: "Les Paul",
+        model: "Les Paul",
         description: "Best Guitar Ever 5",
         color: "black",
         price: 3499,
@@ -128,7 +128,7 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Gibson",
-        modal: "Les Paul",
+        model: "Les Paul",
         description: "Best Guitar Ever 6",
         color: "black",
         price: 3499,
@@ -153,7 +153,7 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Gibson",
-        modal: "Les Paul",
+        model: "Les Paul",
         description: "Best Guitar Ever 7",
         color: "black",
         price: 3499,
@@ -177,31 +177,7 @@ const INITIAL_STATE = [
         mainCategory: "Musical Instruments",
         secondayCategory: "Electric Guitars",
         brand: "Gibson",
-        modal: "Les Paul",
-        description: "Best Guitar Ever 8",
-        color: "black",
-        price: 3499,
-        currency: "USD",
-        availableQty: 2,
-        images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9fMv8OUxgkjZ9XQx_WfUDrvF4WYSd8GmCKw&usqp=CAU'],
-        type: "auction",
-        expiry: "2022-11-27T06:31:23.970Z",
-        offersEnabled: true,
-        seller: {
-            sellerUid: 'b2',
-            sellerAlias: 'Yohoho',
-            sellerShopEmail: 'YohohoShop@gmail.com',
-            sellerRank: '4.1',
-            personalMessagesEnabled: false,
-        }
-    },
-    {
-        id: "a9",
-        title: "Les Paul 59 Reissue",
-        mainCategory: "Musical Instruments",
-        secondayCategory: "Electric Guitars",
-        brand: "Gibson",
-        modal: "Les Paul",
+        model: "Les Paul",
         description: "Best Guitar Ever 8",
         color: "black",
         price: 3499,
@@ -244,6 +220,13 @@ const productsSlice = createSlice({
         },
         deleteProduct(state, action) {
             state = state.filter(el => el.id === action.payload.id)
+        },
+        returnDeletedCartProducts(state, action) {
+            const existingItem = state.find(el => el.id === action.payload.id)
+            if (existingItem !== undefined)
+                state = [...state, existingItem.availableQty+=action.payload.cartQty]
+            else
+                state = [...state, action.payload]
         }
     }
 });

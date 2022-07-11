@@ -23,3 +23,23 @@
   height: 100%;
   flex: 2;
 }
+
+.cart-empty-container {
+  text-align: center;
+}
+
+.cart-empty-text {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.cart-empty-btn {
+  font-size: 1.5rem;
+  background-color: rgba(36, 136, 189);
+  color: #fff;
+  border: none;
+  border-radius: 10rem;
+  text-align: center;
+  padding: 0.8rem 5rem;
+  cursor: pointer;
+}
