@@ -61,7 +61,7 @@
   border-radius: 50%;
   background-color: #ddd;
   position: absolute;
-  z-index: 99999;
+  z-index: 999999999;
   color: #555;
   display: flex;
   align-items: center;
@@ -159,14 +159,13 @@
   /* border: 1px solid red; */
 }
 
-.btns-container .item-timer{
+.btns-container .item-timer {
   font-weight: 600;
   margin-right: 5px;
   position: absolute;
-  bottom:.2rem;
+  bottom: 0.2rem;
   right: 3rem;
 }
-
 
 .btns-container button {
   position: absolute;
@@ -190,4 +189,16 @@
   position: absolute;
   bottom: 0.5rem;
   left: -1.9rem;
+}
+
+.btns-container .status-text {
+  font-weight: 600;
+}
+
+.item-in-cart {
+  color: rgb(3, 181, 175);
+}
+
+.listing-ended {
+  color: red;
 }

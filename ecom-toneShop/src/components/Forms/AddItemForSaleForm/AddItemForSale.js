@@ -54,8 +54,9 @@ const AddItemForSale = () => {
         <ImageBox />
         <ImageBox />
         <ImageBox />
+        <ImageBox />
       </div>
-      <button type="submit">Add New Item</button>
+      <button className={"btn"} type="submit">Add Item</button>
     </form>
   );
 };

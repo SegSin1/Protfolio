@@ -11,6 +11,8 @@ const Input = ({
   animateLabel,
   text,
   name,
+  value,
+  dispatchActions,
   placeholder,
   leftBtnText,
   rightBtnText,
@@ -27,17 +29,26 @@ const Input = ({
   showError,
   errorMsg,
   onClick,
+  blurHandler,
+  changeHandler,
+  focusHandler
 }) => {
   const [isInputFocuse, setIsInputFocus] = useState(false);
-  const [inputVal, setInputVal] = useState("");
+  const [inputVal, setInputVal] = useState(value);
   const inputRef = useRef();
 
   const inputChangeHandler = (e) => {
-    setInputVal(e.target.value);
+      setInputVal(e.target.value)
+      if(type==='search'){
+        dispatchActions(e.target.value);
+      }
+      changeHandler();
   };
 
   const inputBlurHandler = (e) => {
     if (e.target.value.trim().length === 0) setIsInputFocus(false);
+    if(blurHandler)
+    blurHandler();
   };
 
   return (
@@ -51,7 +62,7 @@ const Input = ({
       )}
       <div
         style={{ position: "relative" }}
-        onFocus={() => setIsInputFocus(true)}
+        onFocus={() => {setIsInputFocus(true);if(focusHandler) focusHandler()}}
         onBlur={inputBlurHandler}
       >
         {label && (

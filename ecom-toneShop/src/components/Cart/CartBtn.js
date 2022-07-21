@@ -3,11 +3,12 @@ import classes from "./CartBtn.module.css";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 
-const CartBtn = () => {
+const CartBtn = ({setIsInSaleMode}) => {
   const navigate = useNavigate();
   const totalQty = useSelector(state => state.cart.totalQty);
 
   const showCartHandler = () => {
+    setIsInSaleMode(false);
     navigate('/cart')
   }
   return (

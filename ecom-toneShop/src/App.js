@@ -8,6 +8,7 @@ import { CartProvider } from "./store/CartContext/CartContext";
 import StoreNotifications from "./components/StoreNotifications/StoreNotifications";
 
 import "./App.css";
+import AddItemForSale from "./components/Forms/AddItemForSaleForm/AddItemForSale";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/addItem" element={<AddItemForSale />} />
             <Route path="/watchlist" element={<WatchList />} />
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/notifications" element={<StoreNotifications />} />

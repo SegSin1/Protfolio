@@ -63,8 +63,8 @@ const ProductItem = ({ product }) => {
 
   return (
     <li key={id} className={`${classes["product-container"]} ${showMore ? classes["show-more"] : ''}`}>
-      <div className={classes['img-container']} onClick={showProductDetailsHandler}>
-        <div className={classes.img}>
+      <div className={classes['img-container']} >
+        <div className={classes.img} onClick={showProductDetailsHandler}>
           <img src={images[0]} style={{}} alt="productImg" />
         </div>
         {timer.isExpired && <div className={`${classes['status']} ${classes['ended']}`}>ENDED</div>}
@@ -98,27 +98,16 @@ const ProductItem = ({ product }) => {
               </button>
             </>)}
 
-
           {isInCart && (
-            <div
-              style={{
-                color: "rgb(3, 181, 175)",
-              }}
-              className={classes["btns-text"]}
-            >
+            <div className={`${classes["btns-text"]} ${classes["item-in-cart"]}`}>
               <BsCheck size={20} />
-              <span style={{ fontWeight: 600 }}>Item in cart</span>
+              <span className={`${classes["status-text"]} ${classes["item-in-cart"]}`}>Item in cart</span>
             </div>
           )}
 
           {timer.isExpired && (
-            <div
-              className={classes["btns-text"]}
-              style={{
-                color: "red"
-              }}
-            >
-              <span style={{ fontWeight: 600 }}>Listing Ended</span>
+            <div className={`${classes["btns-text"]} ${classes["listing-ended"]}`} >
+              <span className={classes["status-text"]}>Listing Ended</span>
             </div>
           )}
         </div>

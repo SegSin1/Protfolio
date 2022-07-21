@@ -9,19 +9,33 @@ import StoreNotificationBtn from "../StoreNotifications/StoreNotificationBtn";
 import StoreWatchListBtn from '../WatchList/StoreWatchListBtn';
 import { GiMusicSpell } from "react-icons/gi";
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { searchActions } from '../../store/slices/search-slice'
 
 
 const MainNavbar = () => {
   const isLoggedIn = false;
   const navigate = useNavigate();
-  const logoClickHandler = () => {
+  const dispatch = useDispatch();
+  const [isInSellMode, setIsInSaleMode] = useState(false)
+  const searchValue = useSelector(state => state.search.searchValue)
+  const goToShopClickHandler = () => {
+    setIsInSaleMode(false)
     navigate('/')
+  }
+  const sellOrBuyClickHandler = () => {
+    setIsInSaleMode(!isInSellMode)
+    if (isInSellMode)
+      navigate('/')
+    else
+      navigate('/addItem')
   }
   return (
     <NavBar>
       <ul className={classes["nav-items"]}>
         <li
-          onClick={logoClickHandler}
+          onClick={goToShopClickHandler}
           style={{
             display: "flex",
             alignItems: "center",
@@ -34,9 +48,17 @@ const MainNavbar = () => {
           </span>
         </li>
         <li className={classes["nav-search"]}>
-          <Input type={"text"} id={"nav-search"} iconType="search" placeholder={'Search anything...'} />
+          <Input
+            value={searchValue}
+            type={"search"}
+            id={"nav-search"}
+            iconType="search"
+            placeholder={'Search anything...'}
+            dispatchActions={(val) => dispatch(searchActions.setSearchValue(val))}
+            changeHandler={goToShopClickHandler}
+          />
         </li>
-        <li>SELL</li>
+        <li onClick={sellOrBuyClickHandler}>{isInSellMode ? 'BUY' : 'SELL'}</li>
         <li>
           <ul
             style={{
@@ -59,10 +81,10 @@ const MainNavbar = () => {
               <StoreNotificationBtn />
             </li>
             <li>
-            <StoreWatchListBtn/>
+              <StoreWatchListBtn />
             </li>
             <li>
-              <CartBtn />
+              <CartBtn setIsInSaleMode={setIsInSaleMode}/>
             </li>
           </ul>
         </li>

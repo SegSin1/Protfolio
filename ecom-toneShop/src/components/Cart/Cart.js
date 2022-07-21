@@ -22,7 +22,10 @@ const Cart = () => {
                         </div>}
                     {cart.items.length > 0 && <ul> {cart.items.map((el) => <CartItem cartItem={el} key={el.id} />)}</ul>}
                 </div>
-                {cart.items.length > 0 && <div className={classes['cart-summary-container']}> <CartSummary numOfItems={cart.totalQty} totalAmount={cart.totalAmount} /></div>}
+                {cart.items.length > 0 &&
+                    <div className={classes['cart-summary-container']}>
+                        <CartSummary numOfItems={cart.totalQty} totalAmount={cart.totalAmount} />
+                    </div>}
             </div>
         </>
     )

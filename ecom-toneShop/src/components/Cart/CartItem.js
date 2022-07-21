@@ -1,7 +1,7 @@
 import classes from './CartItem.module.css'
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import { cartActions } from '../../store/slices/cart-slice';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { productsActions } from "../../store/slices/products-slice";
 import {useNavigate} from 'react-router-dom';
 
