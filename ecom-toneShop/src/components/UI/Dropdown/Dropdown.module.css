@@ -1,0 +1,26 @@
+.droplist-container {
+  position: relative;
+}
+
+.droplist-options-container {
+  padding: 1rem;
+  border-radius: 0.2rem;
+  background-color: #fff;
+  position: absolute;
+  min-width: 15rem;
+  height: fit-content;
+  width: fit-content;
+  bottom: 0rem;
+  left: 1rem;
+  transform: translateY(100%);
+  z-index: 999999;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.droplist-options-container .show {
+  display: flex;
+}
