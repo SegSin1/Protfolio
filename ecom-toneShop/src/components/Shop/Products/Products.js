@@ -3,30 +3,60 @@ import classes from "./Products.module.css";
 import Dropdown from "../../UI/Dropdown/Dropdown";
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { filtersSliceActions } from '../../../store/slices/filters-slice'
 
 const Products = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const products = useSelector(state => state.products)
   const searchValue = useSelector(state => state.search.searchValue)
-
+  const activeFilters = useSelector(state => state.filters)
   const addNewItemHandler = () => { navigate('/addItem') }
-
+  // let categoryFilters = Array.from(new Set(products.map(el=>el.secondaryCategory))).map(el=>{return {title:el}})
   let filteredProducts = products && products
-    .filter(el => el.title.toLowerCase().toString().includes(searchValue.toLowerCase()) ||
+    .filter(el => (el.title.toLowerCase().toString().includes(searchValue.toLowerCase()) ||
       el.description.toLowerCase().toString().includes(searchValue.toLowerCase()))
+      && (activeFilters.category.val !== '' ? el.mainCategory === activeFilters.category.val : true)
+      && (activeFilters.instrument.val !== '' ? el.secondaryCategory === activeFilters.instrument.val : true)
+      && (activeFilters.condition.val !== '' ? el.secondaryCategory === activeFilters.condition.val : true)
+    )
   return (
     <>
       <div className={classes['products-page-container']}>
         <div className={classes['product-filters-container']}>
           <div style={{ display: 'flex', gap: '1rem' }}>
-            <Dropdown className={classes['product-filter']} title={'Category'} options={[{title:'Guitars'},{title:'Amplifiers'},{title:'Profilers & Modulers'},{title:'Pedals'},{title:'Guitar Parts and Accessories'},{title:'Recording Gear'},{title:'Drums'},{title:'Other'}]}/>
-            <Dropdown className={classes['product-filter']} type="" title={'Instrument'} options={[{title:'Electric Guitars'},{title:'Acoustic Guitars'},{title:'Bass Guitars'},{title:'Guitar Parts and Accessories'},{title:'Other'}]}/>
-            <Dropdown className={classes['product-filter']} title={'Condition'} options={[{title:'Brand New'},{title:'Open box'},{title:'B-Stock'},{title:'Used-Mint'},{title:'Used-Excellent'},{title:'Used-Very Good'},{title:'Used-Good'},{title:'Used-Poor'},{title:'For Parts'}]}/>
-            <Dropdown className={classes['product-filter']} title={'Brand'}  options={[{title:'Fender',relatedCategory:'Guitars'},{title:'Gibson',relatedCategory:'Guitars'},{title:'Epiphone',relatedCategory:'Guitars'},{title:'ESP',relatedCategory:'Guitars'},{title:'PRS',relatedCategory:'Guitars'},{title:'Ibanez',relatedCategory:'Guitars'},{title:'Martin'},{title:'Squire'},{title:'Taylor'},{title:'Gretsh'},{title:'Jackson'},{title:'Charvel'}]}/>
-            <Dropdown className={classes['product-filter']} title={'Model'}  options={[{title:'Startocaster',relatedCategory:'Guitars',brand:'Fender'},{title:'Telecaster',relatedCategory:'Guitars',brand:'Fender'},{title:'Jazzmaster',relatedCategory:'Guitars',brand:'Fender'},{title:'Jaguar',relatedCategory:'Guitars',brand:'Fender'},{title:'Mustang',relatedCategory:'Guitars',brand:'Fender'},{title:'Jazzmaster',relatedCategory:'Guitars',brand:'Fender'},{title:'Jazzmaster',relatedCategory:'Guitars',brand:'Fender'},{title:'Jazzmaster',relatedCategory:'Guitars',brand:'Fender'},{title:'Jazzmaster',relatedCategory:'Guitars',brand:'Fender'},{title:'ESP',relatedCategory:'Guitars'},{title:'PRS',relatedCategory:'Guitars'},{title:'Ibanez',relatedCategory:'Guitars'}]}/>
-            <Dropdown className={classes['product-filter']} title={'Item Rating'} />
+            <Dropdown
+              className={classes['product-filter']}
+              title={activeFilters.category.title}
+              activeSelection={activeFilters.category.val}
+              options={activeFilters.category.options}
+              clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.category.title, val: value }))}
+            />
+            <Dropdown
+              className={classes['product-filter']}
+              title={activeFilters.instrument.title}
+              activeSelection={activeFilters.instrument.val}
+              options={activeFilters.instrument.options}
+              clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.instrument.title, val: value }))}
+            />
+            <Dropdown
+              className={classes['product-filter']}
+              title={activeFilters.condition.title}
+              activeSelection={activeFilters.condition.val}
+              options={activeFilters.condition.options}
+              clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.condition.title, val: value }))}
+            />
+            <Dropdown 
+              className={classes['product-filter']} 
+              title={activeFilters.brand.title} 
+              options={activeFilters.brand.options} 
+              clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.brand.title, val: value }))}
+            />
+            <Dropdown className={classes['product-filter']} title={activeFilters.model.title} options={activeFilters.model.options} />
+            <Dropdown className={classes['product-filter']} title={'Price'} />
             <Dropdown className={classes['product-filter']} title={'Item Location'} />
-            <Dropdown className={classes['product-filter']} title={'Seller Rating'} />
+            <Dropdown className={classes['product-filter']} title={'More Filters'} />
           </div>
           <div style={{ display: 'flex', gap: '1rem' }}>
             <div>Sort By </div>

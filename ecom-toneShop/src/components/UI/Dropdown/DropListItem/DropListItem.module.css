@@ -1,0 +1,9 @@
+.droplist-item{
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.droplist-item:hover{
+    font-weight: 600;
+    color:rgba(36, 136, 189);
+}

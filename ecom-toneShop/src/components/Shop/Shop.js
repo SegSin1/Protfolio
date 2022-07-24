@@ -22,7 +22,7 @@ const Shop = ({ searchValue }) => {
           <div>Other</div>
         </div> */}
 
-        <div style={{ color: '#555', fontWeight: 600, fontSize: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>Electric Guitars</div>
+        {/* <div style={{ color: '#555', fontWeight: 600, fontSize: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>Electric Guitars</div> */}
         
         
         <Products searchValue={searchValue} />

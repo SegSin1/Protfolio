@@ -1,7 +1,7 @@
 import classes from './DropListItem.module.css'
 
-const DropListItem = ({ type, title }) => {
-    return <li className={classes[`droplist-item-${type}`]}>
+const DropListItem = ({ type, title, key, clickHandler }) => {
+    return <li key={key} className={classes[`droplist-item`]} onClick={clickHandler}>
         {title}
     </li>
 }
