@@ -24,3 +24,14 @@
 .droplist-options-container .show {
   display: flex;
 }
+
+.droplist-options-container h1 {
+  font-size: 1.2rem;
+  line-height: 1.3;
+  letter-spacing: 0.02rem;
+}
+
+.clear-filter svg {
+  transform: translateY(10%) translateX(-30%);
+  cursor: pointer;
+}

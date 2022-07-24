@@ -137,6 +137,10 @@
   font-size: 1.6rem;
   font-weight: 600;
 }
+.title
+{
+  padding-right:.5rem;
+}
 
 .item-description {
   height: 6rem;

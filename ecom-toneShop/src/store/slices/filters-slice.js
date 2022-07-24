@@ -9,18 +9,30 @@ const CATEGOTY_OPTIONS = [
     { title: 'Guitar Parts & Accessories', count: '0' },
     { title: 'Recording Gear', count: '0' },
     { title: 'Drums & Percussions', count: '0' },
+    { title: 'Folk Instruments', count: '0' },
+    { title: 'Bands & Ocahestra', count: '0' },
+    { title: 'Software', count: '0' },
     { title: 'Other', count: '0' }
 ]
 
 const INSTRUMENT_OPTIONS = [
-    { title: 'Electric Guitars', count: '0' },
-    { title: 'Acoustic Guitars', count: '0' },
-    { title: 'Bass Guitars', count: '0' },
-    { title: 'Guitar Parts & Accessories', count: '0' },
-    { title: 'Other', count: '0' }
+    { title: 'All', category: 'All' },
+    { title: 'Electric Guitars', count: '0', category: 'Guitars', options: [] },
+    { title: 'Acoustic Guitars', count: '0', category: 'Guitars', options: [] },
+    { title: 'Classic Guitars', count: '0', category: 'Guitars', options: [] },
+    { title: 'Bass Guitars', count: '0', category: 'Guitars', options: [] },
+    { title: 'Tube Amp', count: '0', category: 'Amplifiers', options: [] },
+    { title: 'Solid State Amp', count: '0', category: 'Amplifiers', options: [] },
+    { title: 'Modeling Amp', count: '0', category: 'Amplifiers', options: [] },
+    { title: 'Acoustic Drums', count: '0', category: 'Drums & Percussions', options: [] },
+    { title: 'Electronic Drums', count: '0', category: 'Drums & Percussions', options: [] },
+    { title: 'Cymbals', count: '0', category: 'Drums & Percussions', options: [] },
+    { title: 'Drum Parts & Accessories', count: '0', category: 'Drums & Percussions', options: [] },
+    { title: 'Orchastra Percussion', count: '0', category: 'Drums & Percussions', options: [] }
 ]
 
 const CONDITION_OPTIONS = [
+    { title: 'All', category: 'All' },
     { title: 'Brand New', count: '0' },
     { title: 'Open box', count: '0' },
     { title: 'B-Stock', count: '0' },
@@ -33,18 +45,18 @@ const CONDITION_OPTIONS = [
 ]
 
 const BRAND_OPTIONS = [
-    { title: 'Fender', relatedCategory: 'Guitars' },
-    { title: 'Gibson', relatedCategory: 'Guitars' },
-    { title: 'Epiphone', relatedCategory: 'Guitars' },
-    { title: 'ESP', relatedCategory: 'Guitars' },
-    { title: 'PRS', relatedCategory: 'Guitars' },
-    { title: 'Ibanez', relatedCategory: 'Guitars' },
-    { title: 'Martin' },
-    { title: 'Squire' },
-    { title: 'Taylor' },
-    { title: 'Gretsh' },
-    { title: 'Jackson' },
-    { title: 'Charvel' }
+    { title: 'Fender', category: 'Guitars' },
+    { title: 'Gibson', category: 'Guitars' },
+    { title: 'Epiphone', category: 'Guitars' },
+    { title: 'ESP', category: 'Guitars' },
+    { title: 'PRS', category: 'Guitars' },
+    { title: 'Ibanez', category: 'Guitars' },
+    { title: 'Martin', category: 'Guitars' },
+    { title: 'Squire', category: 'Guitars' },
+    { title: 'Taylor', category: 'Guitars' },
+    { title: 'Gretsh', category: 'Guitars' },
+    { title: 'Jackson', category: 'Guitars' },
+    { title: 'Charvel', category: 'Guitars' }
 ]
 
 const MODEL_OPTIONS = [
@@ -75,31 +87,23 @@ const filtersSlice = createSlice({
     initialState: INITIAL_STATE,
     reducers: {
         setActiveFilter(state, action) {
-            if (action.payload.type.toLowerCase() === 'category' && action.payload.val.toLowerCase() === 'all')
-                return INITIAL_STATE;
+            if (action.payload.val.toLowerCase() === 'all') {
+                if (action.payload.type.toLowerCase() === 'category') {
+                    state.category = INITIAL_STATE.category
+                    state.instrument = INITIAL_STATE.instrument
+                    state.brand = INITIAL_STATE.brand
+                    state.model = INITIAL_STATE.model
+                } else
+                    state[action.payload.type.toLowerCase()] = INITIAL_STATE[action.payload.type.toLowerCase()]
+            }
+            else if (action.payload.type.toLowerCase() === 'category') {
+                state.category.val = action.payload.val
+                state.instrument = INITIAL_STATE.instrument
+                state.brand = INITIAL_STATE.brand
+                state.model = INITIAL_STATE.model
+            }
             else
                 state[action.payload.type.toLowerCase()].val = action.payload.val
-        }
-    },
-    setFilter(state, action) {
-        switch (action.payload.type) {
-            case 'all categories': state = INITIAL_STATE;
-                break;
-            case 'category': state.category.val = action.payload.category;
-                break;
-            case 'instrument': state.instrument.val = action.payload.instrument;
-                break;
-            case 'condition': state.condition.val = action.payload.condition;
-                break;
-            case 'brand': state.brand.val = action.payload.brand;
-                break;
-            case 'model': state.model.val = action.payload.model;
-                break;
-            case 'price': state.price.val = { max: action.payload.price.max, min: action.payload.price.min };
-                break;
-            case 'location': state.location.val = action.payload.location;
-                break;
-            default: state.category.val = ''
         }
     }
 }

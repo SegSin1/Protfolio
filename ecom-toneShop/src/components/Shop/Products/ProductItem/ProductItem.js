@@ -7,6 +7,7 @@ import { productsActions } from "../../../../store/slices/products-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { dateReducerFn } from '../../../../reducers/dateReducer';
 import { useNavigate } from 'react-router-dom';
+import noImg from '../../../../assets/noimage.jpg'
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
@@ -65,7 +66,7 @@ const ProductItem = ({ product }) => {
     <li key={id} className={`${classes["product-container"]} ${showMore ? classes["show-more"] : ''}`}>
       <div className={classes['img-container']} >
         <div className={classes.img} onClick={showProductDetailsHandler}>
-          <img src={images[0]} style={{}} alt="productImg" />
+          <img src={images.length > 0 ? images[0] : noImg} onError={(e) => e.target.src = noImg} alt="productImg" />
         </div>
         {timer.isExpired && <div className={`${classes['status']} ${classes['ended']}`}>ENDED</div>}
         {!timer.isExpired && availableQty <= 0 && <div className={`${classes['status']} ${classes['out-of-stock']}`}>OUT OF STOCK</div>}

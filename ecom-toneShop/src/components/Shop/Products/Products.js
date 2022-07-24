@@ -15,11 +15,15 @@ const Products = (props) => {
   const addNewItemHandler = () => { navigate('/addItem') }
   // let categoryFilters = Array.from(new Set(products.map(el=>el.secondaryCategory))).map(el=>{return {title:el}})
   let filteredProducts = products && products
-    .filter(el => (el.title.toLowerCase().toString().includes(searchValue.toLowerCase()) ||
-      el.description.toLowerCase().toString().includes(searchValue.toLowerCase()))
+    .filter(el => (el.title.toLowerCase().toString().includes(searchValue.toLowerCase())
+      || el.description.toLowerCase().toString().includes(searchValue.toLowerCase())
+      || el.secondaryCategory.toLowerCase().toString().includes(searchValue.toLowerCase())
+      || el.mainCategory.toLowerCase().toString().includes(searchValue.toLowerCase()))
       && (activeFilters.category.val !== '' ? el.mainCategory === activeFilters.category.val : true)
       && (activeFilters.instrument.val !== '' ? el.secondaryCategory === activeFilters.instrument.val : true)
-      && (activeFilters.condition.val !== '' ? el.secondaryCategory === activeFilters.condition.val : true)
+      && (activeFilters.condition.val !== '' ? el.condition === activeFilters.condition.val : true)
+      && (activeFilters.brand.val !== '' ? el.brand === activeFilters.brand.val : true)
+      && (activeFilters.model.val !== '' ? el.model === activeFilters.model.val : true)
     )
   return (
     <>
@@ -32,13 +36,15 @@ const Products = (props) => {
               activeSelection={activeFilters.category.val}
               options={activeFilters.category.options}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.category.title, val: value }))}
+              resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.category.title, val: 'all' }))}
             />
             <Dropdown
               className={classes['product-filter']}
               title={activeFilters.instrument.title}
               activeSelection={activeFilters.instrument.val}
-              options={activeFilters.instrument.options}
+              options={activeFilters.category.val !== '' ? activeFilters.instrument.options.filter(el => el.category && (el.category.toLowerCase() === activeFilters.category.val.toLowerCase() || el.category === 'All')) : activeFilters.instrument.options}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.instrument.title, val: value }))}
+              resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.instrument.title, val: 'all' }))}
             />
             <Dropdown
               className={classes['product-filter']}
@@ -46,14 +52,24 @@ const Products = (props) => {
               activeSelection={activeFilters.condition.val}
               options={activeFilters.condition.options}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.condition.title, val: value }))}
+              resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.condition.title, val: 'all' }))}
             />
-            <Dropdown 
-              className={classes['product-filter']} 
-              title={activeFilters.brand.title} 
-              options={activeFilters.brand.options} 
+            <Dropdown
+              className={classes['product-filter']}
+              title={activeFilters.brand.title}
+              options={activeFilters.brand.options}
+              activeSelection={activeFilters.brand.val}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.brand.title, val: value }))}
+              resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.brand.title, val: 'all' }))}
             />
-            <Dropdown className={classes['product-filter']} title={activeFilters.model.title} options={activeFilters.model.options} />
+            <Dropdown
+              className={classes['product-filter']}
+              title={activeFilters.model.title}
+              options={activeFilters.model.options}
+              activeSelection={activeFilters.model.val}
+              clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.model.title, val: value }))}
+              resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.model.title, val: 'all' }))}
+            />
             <Dropdown className={classes['product-filter']} title={'Price'} />
             <Dropdown className={classes['product-filter']} title={'Item Location'} />
             <Dropdown className={classes['product-filter']} title={'More Filters'} />

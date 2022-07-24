@@ -1,6 +1,9 @@
 .droplist-item{
     cursor: pointer;
     white-space: nowrap;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    letter-spacing: 0.02rem;
 }
 
 .droplist-item:hover{
