@@ -12,7 +12,7 @@ import AddItemForSale from "./components/Forms/AddItemForSaleForm/AddItemForSale
 
 function App() {
   return (
-    <CartProvider>
+    // <CartProvider>
       <Router>
         <Layout>
           <Routes>
@@ -32,7 +32,7 @@ function App() {
           </Routes>
         </Layout>
       </Router>
-    </CartProvider>
+    // </CartProvider>
   );
 }
 

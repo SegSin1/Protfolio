@@ -11,7 +11,7 @@ import { GiMusicSpell } from "react-icons/gi";
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { searchActions } from '../../store/slices/search-slice'
+import { searchActions, searchState } from '../../store/slices/search-slice'
 
 
 const MainNavbar = () => {
@@ -19,7 +19,7 @@ const MainNavbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isInSellMode, setIsInSaleMode] = useState(false)
-  const searchValue = useSelector(state => state.search.searchValue)
+  const search = useSelector(searchState)
   const goToShopClickHandler = () => {
     setIsInSaleMode(false)
     navigate('/')
@@ -49,7 +49,7 @@ const MainNavbar = () => {
         </li>
         <li className={classes["nav-search"]}>
           <Input
-            value={searchValue}
+            value={search.searchValue}
             type={"search"}
             id={"nav-search"}
             iconType="search"
@@ -84,7 +84,7 @@ const MainNavbar = () => {
               <StoreWatchListBtn />
             </li>
             <li>
-              <CartBtn setIsInSaleMode={setIsInSaleMode}/>
+              <CartBtn setIsInSaleMode={setIsInSaleMode} />
             </li>
           </ul>
         </li>

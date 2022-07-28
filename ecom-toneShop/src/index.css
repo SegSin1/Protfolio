@@ -10,3 +10,10 @@ input[type="file"]::file-selector-button {
 input[type="file"]::file-selector-button:hover {
   cursor: pointer;
 }
+
+#root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}

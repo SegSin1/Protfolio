@@ -2,10 +2,11 @@ import { FiShoppingCart } from "react-icons/fi";
 import classes from "./CartBtn.module.css";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
+import { cartState } from "../../store/slices/cart-slice";
 
 const CartBtn = ({setIsInSaleMode}) => {
   const navigate = useNavigate();
-  const totalQty = useSelector(state => state.cart.totalQty);
+  const cart = useSelector(cartState);
 
   const showCartHandler = () => {
     setIsInSaleMode(false);
@@ -14,7 +15,7 @@ const CartBtn = ({setIsInSaleMode}) => {
   return (
     <button className={classes["cart-btn"]} onClick={showCartHandler}>
       <FiShoppingCart size={25} />
-      <span className={classes.badge}>{totalQty}</span>
+      <span className={classes.badge}>{cart.totalQty}</span>
     </button>
   );
 };

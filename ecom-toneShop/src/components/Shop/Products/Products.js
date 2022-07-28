@@ -5,20 +5,23 @@ import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { filtersSliceActions } from '../../../store/slices/filters-slice'
+import { filtersState } from '../../../store/slices/filters-slice'
+import { productsState } from '../../../store/slices/products-slice'
+import { searchState } from '../../../store/slices/search-slice'
 
 const Products = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products)
-  const searchValue = useSelector(state => state.search.searchValue)
-  const activeFilters = useSelector(state => state.filters)
+  const products = useSelector(productsState)
+  const search = useSelector(searchState)
+  const activeFilters = useSelector(filtersState)
   const addNewItemHandler = () => { navigate('/addItem') }
   // let categoryFilters = Array.from(new Set(products.map(el=>el.secondaryCategory))).map(el=>{return {title:el}})
   let filteredProducts = products && products
-    .filter(el => (el.title.toLowerCase().toString().includes(searchValue.toLowerCase())
-      || el.description.toLowerCase().toString().includes(searchValue.toLowerCase())
-      || el.secondaryCategory.toLowerCase().toString().includes(searchValue.toLowerCase())
-      || el.mainCategory.toLowerCase().toString().includes(searchValue.toLowerCase()))
+    .filter(el => (el.title.toLowerCase().toString().includes(search.searchValue.toLowerCase())
+      || el.description.toLowerCase().toString().includes(search.searchValue.toLowerCase())
+      || el.secondaryCategory.toLowerCase().toString().includes(search.searchValue.toLowerCase())
+      || el.mainCategory.toLowerCase().toString().includes(search.searchValue.toLowerCase()))
       && (activeFilters.category.val !== '' ? el.mainCategory === activeFilters.category.val : true)
       && (activeFilters.instrument.val !== '' ? el.secondaryCategory === activeFilters.instrument.val : true)
       && (activeFilters.condition.val !== '' ? el.condition === activeFilters.condition.val : true)

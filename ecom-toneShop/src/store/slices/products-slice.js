@@ -338,4 +338,5 @@ const productsSlice = createSlice({
 });
 
 export const productsActions = productsSlice.actions;
+export const productsState = state => state.products
 export default productsSlice.reducer;

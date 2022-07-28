@@ -110,4 +110,5 @@ const filtersSlice = createSlice({
 )
 
 export const filtersSliceActions = filtersSlice.actions;
+export const filtersState = state=>state.filters;
 export default filtersSlice.reducer;

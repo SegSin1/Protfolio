@@ -4,10 +4,11 @@ import CartItem from './CartItem'
 import CartSummary from './CartSummary';
 import { useNavigate } from 'react-router-dom'
 import { productsActions } from "../../store/slices/products-slice"
+import {cartState} from '../../store/slices/cart-slice'
 
 const Cart = () => {
     const navigate = useNavigate();
-    const cart = useSelector(state => state.cart);
+    const cart = useSelector(cartState);
     const fillCartHandler = () => {
         navigate('/')
     }
