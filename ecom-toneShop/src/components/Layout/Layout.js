@@ -6,13 +6,13 @@ import classes from './Layout.module.css'
 
 const Layout = ({ children }) => {
     return <>
-        <div className={classes['layout-container']}>
-            <Header />
-            <main>
+        <Header />
+        <main>
+            <div className={classes['main-container']}>
                 {children}
-            </main>
-            <Footer />
-        </div>
+            </div>
+        </main>
+        <Footer />
     </>
 }
 

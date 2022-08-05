@@ -6,12 +6,12 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 const Dropdown = ({
     title = 'notitle',
     type = 'list',
-    subTitle = null,
-    options = [],
+    avaliableOptions=[],
     className = '',
     clickHandler = null,
     resetHandler = null,
-    activeSelection = null
+    activeSelection = null,
+    showEmptyItems=true,
 }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     return (
@@ -30,7 +30,7 @@ const Dropdown = ({
                 className={`${classes[`droplist-options-container`]}`}
                 style={{ display: showDropdown ? 'flex' : 'none' }}>
                 <h1>{title}</h1>
-                {options.map(el => <DropListItem key={el.id} title={el.title} type={type} clickHandler={() => { clickHandler && clickHandler(el.title); setShowDropdown(false); }} />)}
+                {avaliableOptions.map(el => <DropListItem showEmptyItems={showEmptyItems} key={el.id} title={el.title} count={el.count} type={type} clickHandler={() => { clickHandler && clickHandler(el.title); setShowDropdown(false); }} />)}
             </ul>
         </div>
 

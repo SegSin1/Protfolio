@@ -11,6 +11,10 @@
   position: relative;
 }
 
+.not-active {
+  opacity: 0.6;
+}
+
 .show-more {
   height: fit-content;
   z-index: 999999;
@@ -112,6 +116,12 @@
   border-color: red;
 }
 
+.pending,
+.listing-pending {
+  color: rgb(119, 0, 255);
+  border-color: rgb(119, 0, 255);
+}
+
 .details-container {
   display: flex;
   align-items: center;
@@ -129,24 +139,25 @@
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .title,
 .price {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 600;
 }
-.title
-{
-  padding-right:.5rem;
+
+.title {
+  padding-right: 0.5rem;
 }
 
 .item-description {
   height: 6rem;
+  margin-top:.5rem;
   color: #333;
   text-align: justify;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   flex: 2;
   overflow-wrap: break-word;
   margin-bottom: 1rem;

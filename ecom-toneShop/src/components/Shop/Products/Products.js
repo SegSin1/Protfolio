@@ -1,9 +1,8 @@
 import ProductItem from "./ProductItem/ProductItem";
 import classes from "./Products.module.css";
 import Dropdown from "../../UI/Dropdown/Dropdown";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from "react-redux";
 import { filtersSliceActions } from '../../../store/slices/filters-slice'
 import { filtersState } from '../../../store/slices/filters-slice'
 import { productsState } from '../../../store/slices/products-slice'
@@ -16,7 +15,6 @@ const Products = (props) => {
   const search = useSelector(searchState)
   const activeFilters = useSelector(filtersState)
   const addNewItemHandler = () => { navigate('/addItem') }
-  // let categoryFilters = Array.from(new Set(products.map(el=>el.secondaryCategory))).map(el=>{return {title:el}})
   let filteredProducts = products && products
     .filter(el => (el.title.toLowerCase().toString().includes(search.searchValue.toLowerCase())
       || el.description.toLowerCase().toString().includes(search.searchValue.toLowerCase())
@@ -28,50 +26,72 @@ const Products = (props) => {
       && (activeFilters.brand.val !== '' ? el.brand === activeFilters.brand.val : true)
       && (activeFilters.model.val !== '' ? el.model === activeFilters.model.val : true)
     )
+
+  const existingOptionsCounter = {
+    category: filteredProducts.map(el => el.mainCategory).reduce((prev, curr) => { prev[curr] = (prev[curr] || 0) + 1; return prev }, {}),
+    instrument: filteredProducts.map(el => el.secondaryCategory).reduce((prev, curr) => { prev[curr] = (prev[curr] || 0) + 1; return prev }, {}),
+    condition: filteredProducts.map(el => el.condition).reduce((prev, curr) => { prev[curr] = (prev[curr] || 0) + 1; return prev }, {}),
+    brand: filteredProducts.map(el => el.brand).reduce((prev, curr) => { prev[curr] = (prev[curr] || 0) + 1; return prev }, {}),
+    model: filteredProducts.map(el => el.model).reduce((prev, curr) => { prev[curr] = (prev[curr] || 0) + 1; return prev }, {}),
+  }
+
+  const existingOptions = {}
+  for (const item of Object.keys(existingOptionsCounter)) {
+    existingOptions[item] = []
+    for (const option of Object.keys(existingOptionsCounter[item])) {
+      existingOptions[item].push({ title: option, count: existingOptionsCounter[item][option] })
+    }
+  }
+
   return (
     <>
       <div className={classes['products-page-container']}>
         <div className={classes['product-filters-container']}>
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div className={classes['product-filters']}>
             <Dropdown
               className={classes['product-filter']}
               title={activeFilters.category.title}
               activeSelection={activeFilters.category.val}
-              options={activeFilters.category.options}
+              avaliableOptions={existingOptions.category}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.category.title, val: value }))}
               resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.category.title, val: 'all' }))}
+              showEmptyItems={false}
             />
             <Dropdown
               className={classes['product-filter']}
               title={activeFilters.instrument.title}
               activeSelection={activeFilters.instrument.val}
-              options={activeFilters.category.val !== '' ? activeFilters.instrument.options.filter(el => el.category && (el.category.toLowerCase() === activeFilters.category.val.toLowerCase() || el.category === 'All')) : activeFilters.instrument.options}
+              avaliableOptions={existingOptions.instrument}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.instrument.title, val: value }))}
               resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.instrument.title, val: 'all' }))}
+              showEmptyItems={false}
             />
             <Dropdown
               className={classes['product-filter']}
               title={activeFilters.condition.title}
               activeSelection={activeFilters.condition.val}
-              options={activeFilters.condition.options}
+              avaliableOptions={existingOptions.condition}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.condition.title, val: value }))}
               resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.condition.title, val: 'all' }))}
+              showEmptyItems={false}
             />
             <Dropdown
               className={classes['product-filter']}
               title={activeFilters.brand.title}
-              options={activeFilters.brand.options}
               activeSelection={activeFilters.brand.val}
+              avaliableOptions={existingOptions.brand}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.brand.title, val: value }))}
               resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.brand.title, val: 'all' }))}
+              showEmptyItems={false}
             />
             <Dropdown
               className={classes['product-filter']}
               title={activeFilters.model.title}
-              options={activeFilters.model.options}
               activeSelection={activeFilters.model.val}
+              avaliableOptions={existingOptions.model}
               clickHandler={(value) => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.model.title, val: value }))}
               resetHandler={() => dispatch(filtersSliceActions.setActiveFilter({ type: activeFilters.model.title, val: 'all' }))}
+              showEmptyItems={false}
             />
             <Dropdown className={classes['product-filter']} title={'Price'} />
             <Dropdown className={classes['product-filter']} title={'Item Location'} />

@@ -1,8 +1,8 @@
 import classes from './DropListItem.module.css'
 
-const DropListItem = ({ type, title, key, clickHandler }) => {
+const DropListItem = ({ type, title, count, key, clickHandler, showEmptyItems }) => {
     return <li key={key} className={classes[`droplist-item`]} onClick={clickHandler}>
-        {title}
+        {showEmptyItems ? `${title} (${count})` : count > 0 && `${title} (${count})`}
     </li>
 }
 

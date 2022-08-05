@@ -18,6 +18,13 @@
   padding: 2rem;
 }
 
+.product-filters{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .no-products-container {
   text-align: center;
   width: 100%;

@@ -21,6 +21,9 @@ const ProductItem = ({ product }) => {
   const [showMore, setShowMore] = useState(false);
   const [descriptionContent, setDescriptionContent] = useState(false);
 
+  let isListingEnded = timer.isExpired;
+  let isListingActive = product.status === 'active';
+
   useEffect(() => {
     dispatchTimer({ type: 'DD', payload: { date: expiry } })
     if (timer.isExpired)
@@ -43,7 +46,6 @@ const ProductItem = ({ product }) => {
       setDescriptionContent(description.length > 150 ? `${description.slice(0, 149)} ...` : description)
   }, [showMore, description])
 
-
   const addToCartHandler = () => {
     dispatch(cartActions.addItemToCart(product))
     dispatch(productsActions.removeProduct(product))
@@ -63,16 +65,17 @@ const ProductItem = ({ product }) => {
   }
 
   return (
-    <li key={id} className={`${classes["product-container"]} ${showMore ? classes["show-more"] : ''}`}>
+    <li key={id} className={`${classes["product-container"]} ${(!isListingActive || isListingEnded) ? classes['not-active'] : classes['active']} ${showMore ? classes["show-more"] : ''}`}>
       <div className={classes['img-container']} >
         <div className={classes.img} onClick={showProductDetailsHandler}>
           <img src={images.length > 0 ? images[0] : noImg} onError={(e) => e.target.src = noImg} alt="productImg" />
         </div>
-        {timer.isExpired && <div className={`${classes['status']} ${classes['ended']}`}>ENDED</div>}
-        {!timer.isExpired && availableQty <= 0 && <div className={`${classes['status']} ${classes['out-of-stock']}`}>OUT OF STOCK</div>}
-        {!timer.isExpired && availableQty === 1 && type !== 'auction' && <div className={`${classes['status']} ${classes['last-one']}`}>LAST ONE</div>}
-        {!timer.isExpired && availableQty < 3 && availableQty > 1 && type !== 'auction' && <div className={`${classes['status']} ${classes['almost-gone']}`}>ALMOST GONE</div>}
-        {(!timer.isExpired && (timer.interval === 'hours' || timer.interval === 'ending') && availableQty >= 1) && <div className={`${classes['status']} ${classes['ending-soon']}`}>ENDING SOON</div>}
+        {isListingActive && isListingEnded && <div className={`${classes['status']} ${classes['ended']}`}>ENDED</div>}
+        {isListingActive && !isListingEnded && availableQty <= 0 && <div className={`${classes['status']} ${classes['out-of-stock']}`}>OUT OF STOCK</div>}
+        {isListingActive && !isListingEnded && availableQty === 1 && type !== 'auction' && <div className={`${classes['status']} ${classes['last-one']}`}>LAST ONE</div>}
+        {isListingActive && !isListingEnded && availableQty < 3 && availableQty > 1 && type !== 'auction' && <div className={`${classes['status']} ${classes['almost-gone']}`}>ALMOST GONE</div>}
+        {isListingActive && (!isListingEnded && (timer.interval === 'hours' || timer.interval === 'ending') && availableQty >= 1) && <div className={`${classes['status']} ${classes['ending-soon']}`}>ENDING SOON</div>}
+        {!isListingActive && !isListingEnded && <div className={`${classes['status']} ${classes['pending']}`}>{product.status.toUpperCase()}</div>}
         {<div className={`${classes['favorite']} ${isFavorite && classes['in-favorite']}`} onClick={setFavoriteHandler}>{!isFavorite ? <BsStar size={16} /> : <BsStarFill size={16} />}</div>}
       </div>
       <div className={classes['details-container']}>
@@ -82,18 +85,18 @@ const ProductItem = ({ product }) => {
         </div>
         {<div className={classes["item-description"]}>{descriptionContent} {description.length > 150 && <span onClick={showMoreHandler} style={{ cursor: 'pointer', color: 'rgba(36, 136, 189)' }}>{showMore ? 'show less' : 'show more'}</span>}</div>}
         <div className={classes["btns-container"]}>
-          {!isInCart && !timer.isExpired && type !== 'auction' && (
+          {!isInCart && !isListingEnded && isListingActive && type !== 'auction' && (
             <>
-              {(timer.interval === 'hours' || timer.interval === 'ending') && availableQty >= 1 && <span className={classes["item-timer"]} style={{ color: timer.interval === 'ending' ? 'red' : 'inherit' }}>{!timer.isExpired && timer.string}</span>}
+              {(timer.interval === 'hours' || timer.interval === 'ending') && availableQty >= 1 && <span className={classes["item-timer"]} style={{ color: timer.interval === 'ending' ? 'red' : 'inherit' }}>{!isListingEnded && timer.string}</span>}
               <button className={classes.btn} onClick={addToCartHandler}>
                 <BsCartPlus size={20} />
               </button>
             </>
           )
           }
-          {!isInCart && !timer.isExpired && type === 'auction' && (
+          {!isInCart && !isListingEnded && isListingActive && type === 'auction' && (
             <>
-              {(timer.interval === 'hours' || timer.interval === 'ending' || timer.interval === 'days') && <span className={classes["item-timer"]} style={{ fontWeight: 600, marginRight: '5px' }}>{!timer.isExpired && timer.string}</span>}
+              {(timer.interval === 'hours' || timer.interval === 'ending' || timer.interval === 'days') && <span className={classes["item-timer"]} style={{ fontWeight: 600, marginRight: '5px' }}>{!isListingEnded && timer.string}</span>}
               <button>
                 <BiDish size={20} />
               </button>
@@ -106,9 +109,15 @@ const ProductItem = ({ product }) => {
             </div>
           )}
 
-          {timer.isExpired && (
+          {isListingEnded && (
             <div className={`${classes["btns-text"]} ${classes["listing-ended"]}`} >
               <span className={classes["status-text"]}>Listing Ended</span>
+            </div>
+          )}
+
+          {!isListingActive && (
+            <div className={`${classes["btns-text"]} ${classes["listing-pending"]}`} >
+              <span className={classes["status-text"]}>Listing Pending</span>
             </div>
           )}
         </div>
