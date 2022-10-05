@@ -1,6 +1,6 @@
 .product-container {
   width: 30rem;
-  height: 35.8rem;
+  height: 36.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,8 +11,8 @@
   position: relative;
 }
 
-.not-active {
-  opacity: 0.6;
+.not-active  {
+  opacity: 0.5;
 }
 
 .show-more {
@@ -208,6 +208,7 @@
 
 .btns-container .status-text {
   font-weight: 600;
+  
 }
 
 .item-in-cart {
